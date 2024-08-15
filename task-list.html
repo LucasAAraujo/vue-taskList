@@ -93,7 +93,7 @@
   </div>
 
   <script>
-    const { createApp, onMounted, onBeforeMount, ref } = Vue;
+    const { createApp, onMounted, onBeforeMount, ref, watch } = Vue;
 
     const App = {
 
@@ -127,6 +127,14 @@
             newPriority.value = '';
           }
         }
+        // watch(newTask, (newValue, oldValue) => {
+        //   console.log(`New value is ${newValue}, old was ${oldValue}`)
+        // });
+
+        watch(tasks, () => {
+          console.log('Task has changed!')
+        }, {deep: true});
+
         return {
           newTaskInput,
           tasks,
