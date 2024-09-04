@@ -68,7 +68,7 @@
     </form>
 
     <!-- Task filtering -->
-    <input placeholder="Filter tasks...">
+    <input placeholder="Filter tasks..." v-model="filterText">
 
     <!-- If there no tasks -->
     <div v-if="tasks.length === 0">
@@ -78,7 +78,7 @@
     <div v-else>
       <h3>Your Tasks</h3>
       <!-- This is a list of tasks -->
-      <div v-for="task in tasks" :key="task.id" 
+      <div v-for="(task, index) in filteredTasks" :key="task.id" 
         :class="{'task': true, completed: task.done, [task.priority.toLowerCase()]: true }">
         <div>
           <!-- Is task done? -->
@@ -101,6 +101,12 @@
         const tasks = ref(
           JSON.parse(
             localStorage.getItem('tasks') ?? '[]'
+          )
+        );
+        const filteredTasks = computed(
+          () => tasks.value.filter(
+            task => description.toLowerCase()
+              .includes(filterText.value.toLowerCase())
           )
         );
         const newTaskInput = ref(null);
@@ -154,7 +160,9 @@
           addTask,
           newTask,
           newPriority,
-          removeTask
+          removeTask,
+          filterText,
+          filteredTasks
         }
       },
     };
