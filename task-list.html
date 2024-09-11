@@ -18,9 +18,10 @@
       background-color: #dcdcdc;
       padding: 80px;
       border-radius: 8px;
-      display: inline-block;
-      width: 100%; /* Define a largura para que os elementos fiquem centralizados */
-      max-width: 400px; /* Limita a largura máxima */
+      margin-left: 15%;
+      margin-right: 15%;
+      padding-left: 12%;
+      padding-right: 12%;
     }
 
     .title h3 {
@@ -35,6 +36,14 @@
       margin-bottom: 10px;
       font-weight: bold;
       color: #1c1c1c;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     input[type=text], select {
@@ -55,6 +64,7 @@
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-bottom: 10px;
     }
 
     .addTask:hover {
@@ -66,7 +76,7 @@
       align-items: center;
       justify-content: space-between;
       background: white;
-      padding: 10px 20px;
+      padding: 10px 10px;
       margin-bottom: 10px;
       border-radius: 5px;
       border-left: 5px solid;
@@ -94,7 +104,16 @@
       cursor: pointer;
       border: none;
       background: none;
-      font-size: 16px;
+    }
+    
+    .description {
+      display: flex;
+      height: 18px;
+      align-items: baseline;
+    }
+
+    .description span {
+      margin-left: 10px;
     }
 </style>
   <script src="https://unpkg.com/vue@3.4.0"></script>
@@ -134,7 +153,7 @@
       <!-- This is a list of tasks -->
       <div v-for="(task, index) in filteredTasks" :key="task.id"
         :class="{'task': true, completed: task.done, [task.priority.toLowerCase()]: true}">
-        <div>
+        <div class="description">
           <!-- Is task done? -->
           <input type="checkbox" v-model="task.done">
           <!-- Task description -->
